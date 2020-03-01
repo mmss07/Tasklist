@@ -1,19 +1,15 @@
 package com.supero.tasklist.controller;
 
-import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Date;
 
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.supero.tasklist.model.Tasklist;
-import com.supero.tasklist.model.Usuario;
 import com.supero.tasklist.service.CadastroTasklistService;
 import com.supero.tasklist.util.jsf.FacesUtil;
 

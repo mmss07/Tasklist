@@ -2,11 +2,8 @@ package com.supero.tasklist.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.security.NoSuchAlgorithmException;
 
 import javax.enterprise.context.SessionScoped;
-import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -16,8 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.supero.tasklist.model.Usuario;
-import com.supero.tasklist.service.CadastroUsuarioService;
-import com.supero.tasklist.util.Sha2;
 import com.supero.tasklist.util.jsf.FacesUtil;
 
 

@@ -25,10 +25,6 @@ import com.supero.tasklist.util.jsf.FacesUtil;
 @ViewScoped
 public class PesquisaTasklistBean implements Serializable{
 	
-
-	@Inject
-	private Tasklists tasklists;
-	
 	@Inject
 	private CadastroTasklistService cadastroTasklistService;
 
@@ -64,11 +60,11 @@ public class PesquisaTasklistBean implements Serializable{
 		if(filtro.getStatus().equalsIgnoreCase("false")) {
 			filtro.setStatus("");
 		}
-		tasklistsFiltrados = tasklists.filtrados(filtro);
+		tasklistsFiltrados = cadastroTasklistService.filtrados(filtro);
 		return tasklistsFiltrados;
 	}
 	public List<Tasklist> pesquisaTasklists() {
-		tasklistsFiltrados = tasklists.listaTasklists();
+		tasklistsFiltrados = cadastroTasklistService.listaTasklists();
 		return tasklistsFiltrados;
 	}
 

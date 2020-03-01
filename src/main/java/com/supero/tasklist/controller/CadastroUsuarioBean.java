@@ -13,7 +13,6 @@ import javax.inject.Named;
 
 import com.supero.tasklist.model.Usuario;
 import com.supero.tasklist.service.CadastroUsuarioService;
-import com.supero.tasklist.util.Sha2;
 import com.supero.tasklist.util.jsf.FacesUtil;
 
 

@@ -23,10 +23,6 @@ import com.supero.tasklist.util.jsf.FacesUtil;
 @ViewScoped
 public class PesquisaUsuariosBean implements Serializable{
 	
-
-	@Inject
-	private Usuarios usuarios;
-	
 	@Inject
 	private CadastroUsuarioService cadastroUsuarioService;
 	
@@ -60,12 +56,12 @@ public class PesquisaUsuariosBean implements Serializable{
 	public List<Usuario> pesquisa() {		
 		
 		usuariosFiltrados.clear();
-		usuariosFiltrados = usuarios.filtrados(filtro);
+		usuariosFiltrados = cadastroUsuarioService.filtrados(filtro);
 		
 		return usuariosFiltrados;
 	}
 	public List<Usuario> pesquisaUsuarios() {
-		usuariosFiltrados = usuarios.listaUsuarios();
+		usuariosFiltrados = cadastroUsuarioService.listaUsuarios();
 		return usuariosFiltrados;
 	}
 

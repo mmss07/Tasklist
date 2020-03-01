@@ -16,7 +16,6 @@ import org.hibernate.criterion.Restrictions;
 
 import com.supero.tasklist.filter.TasklistFilter;
 import com.supero.tasklist.model.Tasklist;
-import com.supero.tasklist.model.Usuario;
 
 public class Tasklists implements Serializable {
 
@@ -24,9 +23,7 @@ public class Tasklists implements Serializable {
 	
 	@Inject
 	private EntityManager manager;
-
 	
-	@SuppressWarnings("unchecked")
 	public List<Tasklist> filtrados(TasklistFilter filtro) {
 		Session session = manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Tasklist.class);	

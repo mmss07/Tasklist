@@ -6,6 +6,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.persistence.NoResultException;
 
+import com.supero.tasklist.filter.TasklistFilter;
 import com.supero.tasklist.model.Tasklist;
 import com.supero.tasklist.repository.Tasklists;
 import com.supero.tasklist.util.jsf.FacesUtil;
@@ -59,6 +60,12 @@ public class CadastroTasklistService implements Serializable{
 		return tasklist;
 	}
 
+	public List<Tasklist> filtrados(TasklistFilter filtro) {
+		return tasklists.filtrados(filtro);
+	}
 	
+	public List<Tasklist> listaTasklists() {
+		return tasklists.listaTasklists();
+	}
 	
 }
