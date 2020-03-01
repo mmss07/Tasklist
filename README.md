@@ -18,7 +18,8 @@ Senha - root
 <br>
 #SQL de criação da tabela tasklist
 <br>
-#CREATE TABLE `tasklist` (
+<br>
+CREATE TABLE `tasklist` (
   `idtasklist` int NOT NULL AUTO_INCREMENT,
   `titulo` varchar(60) DEFAULT NULL,
   `descricao` varchar(80) DEFAULT NULL,
@@ -30,10 +31,8 @@ Senha - root
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 <br>
 #SQL de criação da tabela usuario
-
 <br>
 <br>
-
 select * from usuarioCREATE TABLE `usuario` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
