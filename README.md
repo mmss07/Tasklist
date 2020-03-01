@@ -14,6 +14,8 @@ Usuario - root
 <br>
 Senha - root
 <br>
+<br>
+<br>
 #SQL de criação da tabela tasklist
 <br>
 #CREATE TABLE `tasklist` (
@@ -28,8 +30,11 @@ Senha - root
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 <br>
 #SQL de criação da tabela usuario
+
 <br>
-#select * from usuarioCREATE TABLE `usuario` (
+<br>
+
+select * from usuarioCREATE TABLE `usuario` (
   `id` bigint NOT NULL AUTO_INCREMENT,
   `email` varchar(255) DEFAULT NULL,
   `login` varchar(255) NOT NULL,
@@ -37,10 +42,12 @@ Senha - root
   `senha` varchar(255) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+<br>
 <br>
 #SQL de criação da tabela grupo
 <br>
-#CREATE TABLE `grupo` (
+CREATE TABLE `grupo` (
   `id` int NOT NULL AUTO_INCREMENT,
   `nome` varchar(60) DEFAULT NULL,
   `descricao` varchar(80) DEFAULT NULL,
@@ -48,8 +55,10 @@ Senha - root
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 <br>
 #SQL de criação da tabela usuario_grupo
+
 <br>
-#CREATE TABLE `usuario_grupo` (
+<br>
+CREATE TABLE `usuario_grupo` (
   `usuario_id` int NOT NULL,
   `grupo_id` int NOT NULL,
   PRIMARY KEY (`usuario_id`,`grupo_id`),
@@ -58,18 +67,26 @@ Senha - root
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 <br>
 #Insert de usuários
+
 <br>
-#INSERT INTO usuario(id, email, login, nome, senha)VALUES (1, 'supero@supero.com', 'supero', 'supero', '123');
+<br>
+INSERT INTO usuario(id, email, login, nome, senha)VALUES (1, 'supero@supero.com', 'supero', 'supero', '123');
+
+<br>
 <br>
 #Insert de grupos
 <br>
-#insert into grupo (nome,descricao) values('ADMINISTRADORES','ADMINISTRADORES');
+insert into grupo (nome,descricao) values('ADMINISTRADORES','ADMINISTRADORES');
+
+<br>
 <br>
 #Insert de usuario_grupo
 <br>
-#insert into usuario_grupo (usuario_id,grupo_id)values(1,1);
+insert into usuario_grupo (usuario_id,grupo_id)values(1,1);
 <br>
 #--Atenção nesse insert confirmar os ID criados nos insert anteriores.--
+
+<br>
 <br>
 #Para baixar o projeto via Github clonando
 <br>
