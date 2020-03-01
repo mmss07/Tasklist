@@ -20,19 +20,12 @@ public class CadastroUsuarioService implements Serializable{
 	
 	@Transactional
 	public void Salvar(Usuario usuario) throws Exception{
-		Usuario usuarioExistente = usuarios.porEmail(usuario.getEmail());		
-		if (usuarioExistente != null && !usuarioExistente.equals(usuario)) {			
-			FacesUtil.addInfoMessage("Já existe um usuário com o E-mail informado.");
-		}else{
-			//usuario.setIdusuario(getNextCodigo());
+	
 			usuarios.salvar(usuario);
-		}
+		
 
 	}
 		
-	public Long getNextCodigo(){				
-		 return usuarios.getNextCodigo();
-	}
 	
 	public List<Usuario> excluir(Usuario usuarioselecionado, List<Usuario> usuariosFiltrados) {		
 		usuarios.excluir(usuarioselecionado);

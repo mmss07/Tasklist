@@ -1,0 +1,79 @@
+<ui:composition template="/WEB-INF/template/LayoutPadrao.xhtml"
+    xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:h="http://java.sun.com/jsf/html"
+    xmlns:f="http://java.sun.com/jsf/core"
+    xmlns:ui="http://java.sun.com/jsf/facelets"
+    xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="titulo">Pesquisa de Tarrefas</ui:define>
+    <f:metadata>
+   		<f:viewParam name="dummy" />
+   		<f:event listener="#{pesquisaTasklistBean.inicializar}" type="preRenderView" />
+   	</f:metadata>
+    <ui:define name="corpo">
+    	
+    	<h:form id="frmPesquisa">
+	    	<h1>Pesquisa de Tarrefas</h1>
+	    	
+	    	<p:toolbar style="margin-top: 20px">
+	    		<p:toolbarGroup>
+	    			<p:commandButton value="Pesquisar" id="pesquisar" action="#{pesquisaTasklistBean.pesquisa}" update="@form" 
+	    			icon="ui-icon-search"/>
+	    		</p:toolbarGroup>
+	    		<p:toolbarGroup align="right">
+	    			<p:button value="Novo" outcome="CadastroTasklist" />
+	    		</p:toolbarGroup>
+	    		
+	    	</p:toolbar>
+	    	
+	    	<p:panelGrid columns="4" id="painel" style="width: 100%; margin-top: 20px"
+	    			columnClasses="rotulo, campo">
+	    		<p:outputLabel value="Nome" for="nome"/>
+	    		<p:inputText id="nome" size="20" value="#{pesquisaTasklistBean.filtro.nome}" style="up" />
+	    		<p:outputLabel value="Login" for="login"/>
+	    		<p:inputText id="login" size="14" value="#{pesquisaTasklistBean.filtro.login}"/>	
+	    		<p:outputLabel value="E-mail" for="email" />
+	    		<p:inputText id="email" size="20" value="#{pesquisaTasklistBean.filtro.email}"/>	    			    	
+	    	</p:panelGrid>
+	    	
+	    	<p:dataTable id="tasklistsTable" value="#{pesquisaTasklistBean.tasklistsFiltrados}" var="tasklist"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma tarrefa encontrada." rows="20"
+	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" sortOrder="true">
+	    			    		
+	    		<p:column headerText="Título" sortBy="#{tasklist.titulo}" style="width: 350px">
+	    			<h:outputText value="#{tasklist.titulo}"/>
+	    		</p:column>
+	    		
+	    		<p:column headerText="Status" sortBy="#{tasklist.status}" style="width: 50px">
+	    			<h:outputText value="#{tasklist.status}"/>
+	    		</p:column>
+	    		
+	    		<p:column headerText="Descrição" style="width: 450px" sortBy="#{tasklist.descricao}">
+	    			<h:outputText value="#{tasklist.descricao}" />
+	    		</p:column>	   
+	    		 		
+	    		<p:column style="width: 100px; text-align: center">
+	    			 <p:button icon="ui-icon-pencil" title="Editar"  outcome="/tasklists/CadastroTasklist">
+	    				<f:param name="tasklist" value="#{tasklist.idtasklist}"/>
+	    			</p:button>			
+	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()" process="@this"
+						update=":frmPesquisa:confirmacaoExclusaoDialog">
+	    				<f:setPropertyActionListener target="#{pesquisaTasklistBean.tasklistselecionado}" 
+	    						value="#{tasklist}"/>	    				
+	    			</p:commandButton>
+	    		</p:column>
+	    	</p:dataTable>
+	    	<p:confirmDialog header="Exclusão de Tarrefas"
+	    	 message="Tem certeza que deseja excluir esse usuário #{pesquisaTasklistBean.tasklistselecionado.descricao}?"
+	    		widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog" global="true">
+	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;"/>
+	    		<p:commandButton value="Sim" oncomplete="PF('confirmacaoExclusao').hide();" 
+	    			process="@this" action="#{pesquisaTasklistBean.excluir}" update=":frmPesquisa:tasklistsTable"/>
+	    		
+	    	</p:confirmDialog>
+	    	<script>       
+       
+    </script>
+    	</h:form>
+    </ui:define>
+</ui:composition>

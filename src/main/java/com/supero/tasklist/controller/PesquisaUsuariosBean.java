@@ -30,9 +30,6 @@ public class PesquisaUsuariosBean implements Serializable{
 	@Inject
 	private CadastroUsuarioService cadastroUsuarioService;
 	
-//	@Inject
-//	private EnvioEmailBean envioEmailBean;
-	
 	private static final long serialVersionUID = 1L;
 	private List<Usuario> usuariosFiltrados;
 	private Usuario usuarioselecionado;
@@ -61,11 +58,10 @@ public class PesquisaUsuariosBean implements Serializable{
 		}
 	}
 	public List<Usuario> pesquisa() {		
-		//Manufatura materia = materias.porDescricao(filtro.getDescricao());
+		
 		usuariosFiltrados.clear();
 		usuariosFiltrados = usuarios.filtrados(filtro);
 		
-		//materiasFiltradas.add(materia);
 		return usuariosFiltrados;
 	}
 	public List<Usuario> pesquisaUsuarios() {

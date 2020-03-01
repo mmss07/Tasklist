@@ -11,32 +11,31 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
-import com.supero.tasklist.model.Usuario;
-import com.supero.tasklist.service.CadastroUsuarioService;
-import com.supero.tasklist.util.Sha2;
+import com.supero.tasklist.model.Tasklist;
+import com.supero.tasklist.service.CadastroTasklistService;
 import com.supero.tasklist.util.jsf.FacesUtil;
 
 
 @Named
 @ViewScoped
-public class CadastroUsuarioBean implements Serializable{
+public class CadastroTasklistBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;	
 	
 	@Inject 
-	private CadastroUsuarioService cadastroUsuarioService;
+	private CadastroTasklistService cadastroTasklistService;
 	
-	private Usuario usuario;
+	private Tasklist tasklist;
 		
-	public CadastroUsuarioBean(){
+	public CadastroTasklistBean(){
 		limpar();
 	}
 	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
 					validaSessao();
-					if(usuario == null)
-						usuario = new Usuario();
+					if(tasklist == null)
+						tasklist = new Tasklist();
 					System.out.println("Inicializou!");	
 		}		
 	}
@@ -44,8 +43,8 @@ public class CadastroUsuarioBean implements Serializable{
 	public void validaSessao() {
 		try {
 			ExternalContext currentExternalContext = FacesContext.getCurrentInstance().getExternalContext();
-			Usuario usuario = (Usuario) currentExternalContext.getSessionMap().get("usuario");
-			if(usuario == null) {
+			Tasklist tasklist = (Tasklist) currentExternalContext.getSessionMap().get("tasklist");
+			if(tasklist == null) {
 				FacesUtil.addInfoMessage("Efetue login!");
 				FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
 			}
@@ -57,42 +56,42 @@ public class CadastroUsuarioBean implements Serializable{
 	public void salvar() throws NoSuchAlgorithmException, UnsupportedEncodingException{		
 		try {
 			
-			Usuario usuarioExistente = cadastroUsuarioService.porEmail(usuario.getEmail());		
-			if (usuarioExistente != null && !usuarioExistente.equals(usuario)) {			
-				FacesUtil.addInfoMessage("Já existe um usuário com o E-mail informado.");
-			}else{
-				Sha2 sha2 = new Sha2(); 
-				usuario.setSenha(sha2.criptografiaSha2(usuario.getSenha()));				
-				cadastroUsuarioService.Salvar(usuario);
-				FacesUtil.addInfoMessage("Usuário Salvo com sucesso!");
-			}
 			
+			Tasklist tasklistExistente = cadastroTasklistService.porDescricao(tasklist.getDescricao());		
+			if (tasklistExistente != null && !tasklistExistente.equals(tasklist)) {			
+				FacesUtil.addInfoMessage("Já existe uma tarrefa com a descrição informada.");
+			}else{			
+				cadastroTasklistService.Salvar(tasklist);
+			}		
+			
+		
 		}catch (Exception e) {
 			FacesUtil.addErrorMessage("ERRO ao Salvar o usuário!");
 		}
 			
 		limpar();
 		
+		FacesUtil.addInfoMessage("Usuário Salvo com sucesso!");
 		
 	}
 	
-	public Usuario getUsuario() {
-		return usuario;
+	public Tasklist getTasklist() {
+		return tasklist;
 	}
 	
-	public void setUsuario(Usuario usuario) {
-		this.usuario = usuario;
+	public void setTasklist(Tasklist tasklist) {
+		this.tasklist = tasklist;
 	}
 
 	
 	private void limpar(){
-		usuario = new Usuario();
+		tasklist = new Tasklist();
 	
 	}
 
 		
 	public boolean isEditando(){
-		return this.usuario.getIdusuario() != null;
+		return this.tasklist.getIdtasklist() != null;
 		
 	}
 		

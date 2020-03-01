@@ -50,12 +50,7 @@ public class Usuarios implements Serializable {
 		return this.manager.find(Usuario.class, idusuario);
 	}
 
-	public List<Usuario> usuarios() {		
-		return this.manager.createQuery("from Usuario", Usuario.class).getResultList();
-	}
-	
 	public List<Usuario> listaUsuarios() {
-		// TODO filtrar apenas vendedores (por um grupo específico)
 		return this.manager.createQuery("from Usuario", Usuario.class)
 				.getResultList();
 	}
@@ -85,18 +80,7 @@ public class Usuarios implements Serializable {
 		
 		return usuario;
 	}
-	
-	public Long getNextCodigo() {
-		Long codigo = new Long(0);
-		try {
-			codigo = this.manager.createQuery("SELECT MAX(id) from Usuario", Long.class).getSingleResult();
-		} catch (NoResultException e) {
-			// nenhum usuário encontrado com o e-mail informado
-		}
-		
-		return codigo+1;
-	}
-	
+
 	@com.supero.tasklist.util.jpa.Transactional
 	public Usuario salvar(Usuario usuario){		
 		usuario = manager.merge(usuario);		
