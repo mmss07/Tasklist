@@ -43,7 +43,7 @@ public class CadastroTasklistService implements Serializable{
 		try {
 			tasklist = tasklists.porDescricao(descricao);
 		} catch (NoResultException e) {
-			// nenhum usuário encontrado com o e-mail informado
+			
 		}
 		
 		return tasklist;
@@ -55,11 +55,12 @@ public class CadastroTasklistService implements Serializable{
 		try {
 			tasklist = tasklists.porTitulo(titulo);
 		} catch (NoResultException e) {
-			// nenhum usuário encontrado com o e-mail informado
+			
 		}
 		
 		return tasklist;
 	}
 
+	
 	
 }

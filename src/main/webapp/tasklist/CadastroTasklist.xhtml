@@ -8,7 +8,7 @@
 
     <ui:define name="titulo">#{cadastroTasklistBean.editando ? 'Edição de Tarrefa' : 'Nova Tarrefa'}</ui:define>
     <f:metadata>
-    		<o:viewParam name="usuario" value="#{cadastroTasklistBean.tasklist}" />
+    		<o:viewParam name="tasklist" value="#{cadastroTasklistBean.tasklist}" />
     		<f:event listener="#{cadastroTasklistBean.inicializar}" type="preRenderView" />
     	</f:metadata>
     <style>
@@ -44,7 +44,7 @@
 	    	<p:toolbar style="margin-top: 20px">
 	    		<p:toolbarGroup>
 	    			<p:button value="Limpar" outcome="CadastroTasklist"/>
-	    			<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroTasklistBean.salvar}"/>
+	    			<p:commandButton value="Salvar" id="botaoSalvar" action="#{cadastroTasklistBean.salvar}" update="@form"/>
 	    			
 	    		</p:toolbarGroup>
 	    		<p:toolbarGroup align="right">

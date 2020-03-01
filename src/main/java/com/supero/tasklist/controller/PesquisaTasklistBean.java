@@ -2,6 +2,7 @@ package com.supero.tasklist.controller;
 
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ViewScoped;
@@ -89,7 +90,7 @@ public class PesquisaTasklistBean implements Serializable{
 		this.tasklistsFiltrados = tasklistsFiltrados;
 	}
 	public void excluir() {
-		
+		tasklistselecionado.setDataexclusao(new Date());
 		tasklistsFiltrados = cadastroTasklistService.excluir(tasklistselecionado, tasklistsFiltrados);							
 		FacesUtil.addInfoMessage("Tarrefa " + tasklistselecionado.getDescricao() + " excluída com sucesso.");
 	}
