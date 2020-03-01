@@ -1,6 +1,8 @@
 # supero
 Teste supero SC
+<br>
 #Projeto feito com PrimeFaces, Mysql, Spring Security, JavaEE 7
+<br>
 #URL da aplicação rodando localmente 
 http://localhost:8080/SuperoTasklist/Login.xhtml
 
