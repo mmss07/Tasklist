@@ -6,7 +6,7 @@
     xmlns:p="http://primefaces.org/ui"
     xmlns:o="http://omnifaces.org/ui">
 
-    <ui:define name="titulo">#{cadastroTasklistBean.editando ? 'Edição de Tarrefa' : 'Nova Tarrefa'}</ui:define>
+    <ui:define name="titulo">#{cadastroTasklistBean.editando ? 'Edição de Tarefa' : 'Nova Tarefa'}</ui:define>
     <f:metadata>
     		<o:viewParam name="tasklist" value="#{cadastroTasklistBean.tasklist}" />
     		<f:event listener="#{cadastroTasklistBean.inicializar}" type="preRenderView" />
@@ -22,7 +22,7 @@
     <ui:define name="corpo">
     	
     	<h:form id="frm">
-	    	<h1>#{cadastroTasklistBean.editando ? 'Edição de Tarrefa' : 'Nova Tarrefa'}</h1>
+	    	<h1>#{cadastroTasklistBean.editando ? 'Edição de Tarefa' : 'Nova Tarefa'}</h1>
 	    	
 	    	<p:messages autoUpdate="true" closable="true"/>
 	    		    		    	

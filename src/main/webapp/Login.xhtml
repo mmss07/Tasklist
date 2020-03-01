@@ -7,37 +7,33 @@
     xmlns:o ="http://omnifaces.org/ui">
     <h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <ui:define name="titulo">Seleção Supero - Controle de Tarrefas</ui:define>
+        <ui:define name="titulo">Seleção Supero - Controle de Tarefas</ui:define>
         <h:outputStylesheet library="css" name="sistema.css"/>
         
-    </h:head>
-    <f:metadata>
-   		<o:viewParam name="usuario" value="#{loginBean.usuario}" />
-   		<f:event listener="#{loginBean.inicializar}" type="preRenderView" />
-   	</f:metadata>
-    <h:body>
-    	<header>
 			<div>
 				<h:link>
 					<h:graphicImage library="imagens" name="postit.png" width="90px" height="50px" />
 				</h:link>
 			</div>
-		</header>
+    </h:head>
+    <f:metadata>
+   		<f:viewParam name="dummy" />
+   		<f:event listener="#{loginBean.preRender}" type="preRenderView" />
+   	</f:metadata>
+    <h:body>
     	<div id="login-dialog">
     		<h1>Login</h1>
     		<p:messages autoUpdate="true" closable="true"/>
-    		<h:form id="frm">
+    		<h:form id="frm" prependId="false">
     			<h:panelGrid columns="2" styleClass="grid-login">
     				<p:outputLabel value="Login" />
-    				<p:inputText size="30" value="#{loginBean.usuario.login}"/>
+    				<p:inputText size="30" value="#{loginBean.usuario.email}" id="username"/>
     				
     				<p:outputLabel value="Senha"/>
-    				<p:password size="30" value="#{loginBean.usuario.senha}"/>
+    				<p:password size="30" id="password"/>
     				
     				<h:panelGroup/>
-    				<p:commandButton icon="ui-icon-unlocked"
-                            value="Entrar"
-                                  action="#{loginBean.validaLogin}" />
+    				<p:commandButton icon="ui-icon-unlocked" value="Entrar" action="#{loginBean.login}" ajax="false"/>
     			</h:panelGrid>
     		</h:form>
     	</div>
@@ -48,7 +44,7 @@
     <br/>
     <br/>
     <footer>
-		Seleção Supero - Controle de Tarrefas
+		Seleção Supero - Controle de Tarefas
 		<a href="https://www.supero.com.br/" target="_blank">www.supero.com.br</a>
 	</footer>
     </h:body>

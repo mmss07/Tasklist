@@ -40,7 +40,7 @@ public class PesquisaTasklistBean implements Serializable{
 	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
-			validaSessao();
+			
 			filtro = new TasklistFilter();
 			pesquisaTasklists();
 		}
@@ -61,6 +61,9 @@ public class PesquisaTasklistBean implements Serializable{
 	}
 	public List<Tasklist> pesquisa() {				
 		tasklistsFiltrados.clear();
+		if(filtro.getStatus().equalsIgnoreCase("false")) {
+			filtro.setStatus("");
+		}
 		tasklistsFiltrados = tasklists.filtrados(filtro);
 		return tasklistsFiltrados;
 	}
@@ -92,7 +95,7 @@ public class PesquisaTasklistBean implements Serializable{
 	public void excluir() {
 		tasklistselecionado.setDataexclusao(new Date());
 		tasklistsFiltrados = cadastroTasklistService.excluir(tasklistselecionado, tasklistsFiltrados);							
-		FacesUtil.addInfoMessage("Tarrefa " + tasklistselecionado.getDescricao() + " excluída com sucesso.");
+		FacesUtil.addInfoMessage("Tarefa " + tasklistselecionado.getDescricao() + " excluída com sucesso.");
 	}
 	
 	

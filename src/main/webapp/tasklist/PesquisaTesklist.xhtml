@@ -5,7 +5,7 @@
     xmlns:ui="http://java.sun.com/jsf/facelets"
     xmlns:p="http://primefaces.org/ui">
 
-    <ui:define name="titulo">Pesquisa de Tarrefas</ui:define>
+    <ui:define name="titulo">Pesquisa de Tarefas</ui:define>
     <f:metadata>
    		<f:viewParam name="dummy" />
    		<f:event listener="#{pesquisaTasklistBean.inicializar}" type="preRenderView" />
@@ -13,7 +13,7 @@
     <ui:define name="corpo">
     	
     	<h:form id="frmPesquisa">
-	    	<h1>Pesquisa de Tarrefas</h1>
+	    	<h1>Pesquisa de Tarefas</h1>
 	    	
 	    	<p:toolbar style="margin-top: 20px">
 	    		<p:toolbarGroup>
@@ -38,7 +38,7 @@
 	    	</p:panelGrid>
 	    	
 	    	<p:dataTable id="tasklistsTable" value="#{pesquisaTasklistBean.tasklistsFiltrados}" var="tasklist"
-	    		style="margin-top: 20px" emptyMessage="Nenhuma tarrefa encontrada." rows="20"
+	    		style="margin-top: 20px" emptyMessage="Nenhuma tarefa encontrada." rows="20"
 	    		paginator="true" paginatorAlwaysVisible="false" paginatorPosition="bottom" sortOrder="true">
 	    			    		
 	    		<p:column headerText="Título" sortBy="#{tasklist.titulo}" style="width: 350px">
@@ -63,7 +63,7 @@
 	    			</p:commandButton>
 	    		</p:column>
 	    	</p:dataTable>
-	    	<p:confirmDialog header="Exclusão de Tarrefas"
+	    	<p:confirmDialog header="Exclusão de Tarefas"
 	    	 message="Tem certeza que deseja excluir esse usuário #{pesquisaTasklistBean.tasklistselecionado.descricao}?"
 	    		widgetVar="confirmacaoExclusao" id="confirmacaoExclusaoDialog" global="true">
 	    		<p:button value="Não" onclick="PF('confirmacaoExclusao').hide(); return false;"/>

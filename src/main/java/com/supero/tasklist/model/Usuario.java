@@ -1,19 +1,28 @@
 package com.supero.tasklist.model;
 
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
 @Entity
-public class Usuario {
+public class Usuario implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 	
-	@Id
-	@GeneratedValue
-	private Long idusuario;
+	
+	private Long id;
 	
 	@NotNull	
 	private String nome;
@@ -26,6 +35,9 @@ public class Usuario {
 	
 	@NotNull
 	private String senha;
+	
+	
+	private List<Grupo> grupos = new ArrayList<>();
 	
 	@Size(max = 60)
 	public String getNome() {
@@ -53,22 +65,32 @@ public class Usuario {
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public Long getIdusuario() {
-		return idusuario;
-	}
-	public void setIdusuario(Long idusuario) {
-		this.idusuario = idusuario;
-	}	
 	
+	@Id
+	@GeneratedValue
+	public Long getId() {
+		return id;
+	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JoinTable(name = "usuario_grupo", joinColumns = @JoinColumn(name="usuario_id"),
+			inverseJoinColumns = @JoinColumn(name = "grupo_id"))
+	public List<Grupo> getGrupos() {
+		return grupos;
+	}
+	public void setGrupos(List<Grupo> grupos) {
+		this.grupos = grupos;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((idusuario == null) ? 0 : idusuario.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
-	
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -78,13 +100,14 @@ public class Usuario {
 		if (getClass() != obj.getClass())
 			return false;
 		Usuario other = (Usuario) obj;
-		if (idusuario == null) {
-			if (other.idusuario != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!idusuario.equals(other.idusuario))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
+	
 	
 	
 

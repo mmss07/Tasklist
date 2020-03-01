@@ -38,7 +38,7 @@ public class PesquisaUsuariosBean implements Serializable{
 	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
-			validaSessao();
+			
 			filtro = new UsuarioFilter();
 			pesquisaUsuarios();
 		}

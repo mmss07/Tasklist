@@ -34,7 +34,7 @@ public class CadastroUsuarioBean implements Serializable{
 	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
-					validaSessao();
+					
 					if(usuario == null)
 						usuario = new Usuario();
 					System.out.println("Inicializou!");	
@@ -61,8 +61,8 @@ public class CadastroUsuarioBean implements Serializable{
 			if (usuarioExistente != null && !usuarioExistente.equals(usuario)) {			
 				FacesUtil.addInfoMessage("Já existe um usuário com o E-mail informado.");
 			}else{
-				Sha2 sha2 = new Sha2(); 
-				usuario.setSenha(sha2.criptografiaSha2(usuario.getSenha()));				
+				//Sha2 sha2 = new Sha2(); 
+				//usuario.setSenha(sha2.criptografiaSha2(usuario.getSenha()));				
 				cadastroUsuarioService.Salvar(usuario);
 				limpar();
 				FacesUtil.addInfoMessage("Usuário Salvo com sucesso!");
@@ -70,9 +70,7 @@ public class CadastroUsuarioBean implements Serializable{
 			
 		}catch (Exception e) {
 			FacesUtil.addErrorMessage("ERRO ao Salvar o usuário!");
-		}
-			
-		
+		}		
 		
 	}
 	
@@ -83,19 +81,16 @@ public class CadastroUsuarioBean implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
 	
 	private void limpar(){
 		usuario = new Usuario();
 	
 	}
-
 		
 	public boolean isEditando(){
-		return this.usuario.getIdusuario() != null;
+		return this.usuario.getId() != null;
 		
 	}
 		
-
 }
 

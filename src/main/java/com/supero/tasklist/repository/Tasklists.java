@@ -71,7 +71,7 @@ public class Tasklists implements Serializable {
 			manager.flush();
 			
 		} catch (PersistenceException e) {
-			throw new PersistenceException("Tarrefa Não pode ser Excluída!");
+			throw new PersistenceException("Tarefa Não pode ser Excluída!");
 		}
 	}
 	

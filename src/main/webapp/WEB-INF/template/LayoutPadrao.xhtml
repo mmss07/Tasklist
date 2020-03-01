@@ -8,16 +8,16 @@
 
 	<h:head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-        <title><ui:insert name="titulo">Seleção Supero - Controle de Tarrefas</ui:insert></title>
+        <title><ui:insert name="titulo">Seleção Supero - Controle de Tarefas</ui:insert></title>
         <h:outputStylesheet library="css" name="sistema.css" />        
 	</h:head>
 
 	<h:body>
 			
 		<p:ajaxStatus styleClass="ajax-status">
-<!-- 			<f:facet name="start"> -->
-<!-- 				<h:graphicImage library="imagens" name="loading.gif"/> -->
-<!-- 			</f:facet> -->
+			<f:facet name="start">
+				<h:graphicImage library="imagens" name="loading.gif"/>
+			</f:facet>
 			<f:facet name="complete">
 				<h:outputText value=""/>
 			</f:facet>
@@ -40,15 +40,15 @@
 						<p:submenu label="Cadastros">
 							<p:menuitem value="Usuários" outcome="/usuarios/CadastroUsuario"/>							
 							<p:separator/>
-							<p:menuitem value="Tarrefas" outcome="/tasklist/CadastroTasklist"/>							
+							<p:menuitem value="Tarefas" outcome="/tasklist/CadastroTasklist"/>							
 							
 						</p:submenu>	
 						<p:submenu label="Pesquisas">							
 							<p:menuitem value="Pequisa de Usuários" outcome="/usuarios/PesquisaUsuarios"/>
 							<p:separator/>
-							<p:menuitem value="Pequisa de Tarrefas" outcome="/tasklist/PesquisaTesklist"/>							
+							<p:menuitem value="Pequisa de Tarefas" outcome="/tasklist/PesquisaTesklist"/>							
 						</p:submenu>					
-						<p:menuitem value="Sair" outcome="/Login"/>
+						<p:menuitem value="Sair" url="/logout"/>
 					</p:menubar>
 				</h:form>
 			</div>
@@ -61,7 +61,7 @@
 	<p:separator style="margin-top: 20px"/>
 	
 	<footer>
-		Seleção Supero - Controle de Tarrefas
+		Seleção Supero - Controle de Tarefas
 		<a href="https://www.supero.com.br/" target="_blank">www.supero.com.br</a>
 	</footer>
 

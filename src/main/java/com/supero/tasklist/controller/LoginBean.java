@@ -1,73 +1,50 @@
 package com.supero.tasklist.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 
-import javax.faces.bean.ViewScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.supero.tasklist.model.Usuario;
 import com.supero.tasklist.service.CadastroUsuarioService;
 import com.supero.tasklist.util.Sha2;
 import com.supero.tasklist.util.jsf.FacesUtil;
 
+
+
 @Named
-@ViewScoped
+@SessionScoped
 public class LoginBean implements Serializable{
 	
 	private static final long serialVersionUID = 1L;	
 
 	private Usuario usuario;
 	
-
-	@Inject 
-	private CadastroUsuarioService cadastroUsuarioService;
+	@Inject
+	private FacesContext facesContext;
 	
-	private void currentExternalContext(Usuario usuarioAux){
-	       if (FacesContext.getCurrentInstance() == null){
-	           throw new RuntimeException("O FacesContext não pode ser chamado fora de uma requisição HTTP");
-	       }else{
-	    	   ExternalContext currentExternalContext = FacesContext.getCurrentInstance().getExternalContext();
-	    	   currentExternalContext.getSessionMap().put("usuario", usuarioAux);
-	       }
-	    }
+	@Inject
+	private HttpServletRequest request;
 	
-	public void inicializar() {
-		if (FacesUtil.isNotPostback()) {
-			usuario = new Usuario();
-			FacesContext.getCurrentInstance().getExternalContext().getSessionMap().remove("usuario");
-			System.out.println("Inicializou!");
-		}		
+	@Inject
+	private HttpServletResponse response;
+	
+	public void preRender() {
+		if ("true".equals(request.getParameter("invalid"))) {
+			FacesUtil.addErrorMessage("Usuário ou senha inválido!");
+		}
 	}
 	
-	public String validaLogin() {
-	    String retorno = "";   
-		Sha2 sha2 = new Sha2(); 
-		try {
-			usuario.setSenha(sha2.criptografiaSha2(usuario.getSenha()));
-			
-			Usuario usuarioAux = cadastroUsuarioService.porLoginESenha(usuario.getLogin(), usuario.getSenha());
-			
-			if(usuarioAux != null) {
-				currentExternalContext(usuarioAux);
-				retorno = "/Home.xhtml?faces-redirect=true";
-			}else {				
-				FacesUtil.addErrorMessage("Usuário não encontrado!");
-			}
-		} catch (NoSuchAlgorithmException e) {
-			FacesUtil.addErrorMessage("ERRO ao logar o usuário!");
-		} catch (UnsupportedEncodingException e) {
-			FacesUtil.addErrorMessage("ERRO ao logar o usuário!");
-		}				
-	   return retorno;
-	       
-	  
-	}
-
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -76,6 +53,11 @@ public class LoginBean implements Serializable{
 		this.usuario = usuario;
 	}
 	
-
+	public void login() throws ServletException, IOException {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.xhtml");
+		dispatcher.forward(request, response);
+		
+		facesContext.responseComplete();
+	}
 	
 }

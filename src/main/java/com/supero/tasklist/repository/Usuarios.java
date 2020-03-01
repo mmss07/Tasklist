@@ -90,7 +90,7 @@ public class Usuarios implements Serializable {
 	@com.supero.tasklist.util.jpa.Transactional
 	public void excluir(Usuario usuario) {		
 		try {			
-			usuario = porId(usuario.getIdusuario());
+			usuario = porId(usuario.getId());
 			manager.remove(usuario);
 			manager.flush();
 			

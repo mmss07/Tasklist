@@ -35,24 +35,11 @@ public class CadastroTasklistBean implements Serializable{
 	
 	public void inicializar() {
 		if (FacesUtil.isNotPostback()) {
-					validaSessao();
+					
 					if(tasklist == null)
 						tasklist = new Tasklist();
 					System.out.println("Inicializou!");	
 		}		
-	}
-
-	public void validaSessao() {
-		try {
-			ExternalContext currentExternalContext = FacesContext.getCurrentInstance().getExternalContext();
-			Usuario usuario = (Usuario) currentExternalContext.getSessionMap().get("usuario");
-			if(usuario == null) {
-				FacesUtil.addInfoMessage("Efetue login!");
-				FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
 	
 	public void salvar() throws NoSuchAlgorithmException, UnsupportedEncodingException{		
@@ -61,7 +48,7 @@ public class CadastroTasklistBean implements Serializable{
 			
 			Tasklist tasklistExistente = cadastroTasklistService.porTitulo(tasklist.getTitulo());		
 			if (tasklistExistente != null && !tasklistExistente.equals(tasklist)) {			
-				FacesUtil.addInfoMessage("Já existe uma tarrefa com o título informado.");
+				FacesUtil.addInfoMessage("Já existe uma tarefa com o título informado.");
 			}else{	
 				if(tasklist.getIdtasklist() == null) {
 					tasklist.setDatacadastro(new Date());
@@ -70,12 +57,12 @@ public class CadastroTasklistBean implements Serializable{
 				}
 				cadastroTasklistService.Salvar(tasklist);
 				limpar();
-				FacesUtil.addInfoMessage("Tarrefa salva com sucesso!");
+				FacesUtil.addInfoMessage("Tarefa salva com sucesso!");
 			}		
 			
 		
 		}catch (Exception e) {
-			FacesUtil.addErrorMessage("ERRO ao Salvar a tarrefa!");
+			FacesUtil.addErrorMessage("ERRO ao Salvar a tarefa!");
 		}					
 	}
 	

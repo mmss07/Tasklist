@@ -5,8 +5,6 @@ import java.util.List;
 
 import javax.inject.Inject;
 
-import org.springframework.transaction.annotation.Transactional;
-
 import com.supero.tasklist.model.Usuario;
 import com.supero.tasklist.repository.Usuarios;
 import com.supero.tasklist.util.jsf.FacesUtil;
@@ -18,12 +16,9 @@ public class CadastroUsuarioService implements Serializable{
 	@Inject
 	private Usuarios usuarios;
 	
-	@Transactional
-	public void Salvar(Usuario usuario) throws Exception{
-	
-			usuarios.salvar(usuario);
-		
 
+	public void Salvar(Usuario usuario) throws Exception{
+		usuarios.salvar(usuario);
 	}
 		
 	
