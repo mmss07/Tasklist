@@ -57,8 +57,7 @@
 	    			</p:button>			
 	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()" process="@this"
 						update=":frmPesquisa:confirmacaoExclusaoDialog">
-	    				<f:setPropertyActionListener target="#{pesquisaUsuariosBean.usuarioselecionado}" 
-	    						value="#{usuario}"/>	    				
+	    				<f:setPropertyActionListener target="#{pesquisaUsuariosBean.usuarioselecionado}" value="#{usuario}"/>	    				
 	    			</p:commandButton>
 	    		</p:column>
 	    	</p:dataTable>

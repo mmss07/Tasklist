@@ -31,7 +31,9 @@ public class Tasklists implements Serializable {
 		Session session = manager.unwrap(Session.class);
 		Criteria criteria = session.createCriteria(Tasklist.class);	
 		
-		
+		if ((filtro.getTitulo() != null)&&(filtro.getTitulo() != "")) { 
+			criteria.add(Restrictions.like("titulo","%"+filtro.getTitulo()+"%"));
+		}
 		
 		if ((filtro.getDescricao() != null)&&(filtro.getDescricao() != "")) { 
 			criteria.add(Restrictions.like("descricao","%"+filtro.getDescricao()+"%"));
@@ -41,7 +43,7 @@ public class Tasklists implements Serializable {
 			criteria.add(Restrictions.like("status","%"+filtro.getStatus()+"%"));
 		}
 
-		return criteria.addOrder(Order.asc("nome")).list();
+		return criteria.addOrder(Order.asc("titulo")).list();
 		
 	}
 	
@@ -85,4 +87,18 @@ public class Tasklists implements Serializable {
 		
 		return tasklist;
 	}
+	
+	public Tasklist porTitulo(String titulo) {
+		Tasklist tasklist = null;
+		
+		try {
+			tasklist = this.manager.createQuery("SELECT x from Tasklist x where lower(x.titulo) = :titulo", Tasklist.class)
+				.setParameter("titulo", titulo.toLowerCase()).getSingleResult();
+		} catch (NoResultException e) {
+			// nenhum usuário encontrado com o e-mail informado
+		}
+		
+		return tasklist;
+	}
+	
 }

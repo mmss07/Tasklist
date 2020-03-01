@@ -64,6 +64,7 @@ public class CadastroUsuarioBean implements Serializable{
 				Sha2 sha2 = new Sha2(); 
 				usuario.setSenha(sha2.criptografiaSha2(usuario.getSenha()));				
 				cadastroUsuarioService.Salvar(usuario);
+				limpar();
 				FacesUtil.addInfoMessage("Usuário Salvo com sucesso!");
 			}
 			
@@ -71,7 +72,6 @@ public class CadastroUsuarioBean implements Serializable{
 			FacesUtil.addErrorMessage("ERRO ao Salvar o usuário!");
 		}
 			
-		limpar();
 		
 		
 	}

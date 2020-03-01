@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.Date;
 
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import com.supero.tasklist.model.Tasklist;
+import com.supero.tasklist.model.Usuario;
 import com.supero.tasklist.service.CadastroTasklistService;
 import com.supero.tasklist.util.jsf.FacesUtil;
 
@@ -43,8 +45,8 @@ public class CadastroTasklistBean implements Serializable{
 	public void validaSessao() {
 		try {
 			ExternalContext currentExternalContext = FacesContext.getCurrentInstance().getExternalContext();
-			Tasklist tasklist = (Tasklist) currentExternalContext.getSessionMap().get("tasklist");
-			if(tasklist == null) {
+			Usuario usuario = (Usuario) currentExternalContext.getSessionMap().get("usuario");
+			if(usuario == null) {
 				FacesUtil.addInfoMessage("Efetue login!");
 				FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
 			}
@@ -57,22 +59,24 @@ public class CadastroTasklistBean implements Serializable{
 		try {
 			
 			
-			Tasklist tasklistExistente = cadastroTasklistService.porDescricao(tasklist.getDescricao());		
+			Tasklist tasklistExistente = cadastroTasklistService.porTitulo(tasklist.getTitulo());		
 			if (tasklistExistente != null && !tasklistExistente.equals(tasklist)) {			
-				FacesUtil.addInfoMessage("Já existe uma tarrefa com a descrição informada.");
-			}else{			
+				FacesUtil.addInfoMessage("Já existe uma tarrefa com o título informado.");
+			}else{	
+				if(tasklist.getIdtasklist() == null) {
+					tasklist.setDatacadastro(new Date());
+				}else {
+					tasklist.setDataalteracao(new Date());
+				}
 				cadastroTasklistService.Salvar(tasklist);
+				limpar();
+				FacesUtil.addInfoMessage("Tarrefa salva com sucesso!");
 			}		
 			
 		
 		}catch (Exception e) {
-			FacesUtil.addErrorMessage("ERRO ao Salvar o usuário!");
-		}
-			
-		limpar();
-		
-		FacesUtil.addInfoMessage("Usuário Salvo com sucesso!");
-		
+			FacesUtil.addErrorMessage("ERRO ao Salvar a tarrefa!");
+		}					
 	}
 	
 	public Tasklist getTasklist() {

@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import com.supero.tasklist.filter.TasklistFilter;
 import com.supero.tasklist.model.Tasklist;
+import com.supero.tasklist.model.Usuario;
 import com.supero.tasklist.repository.Tasklists;
 import com.supero.tasklist.service.CadastroTasklistService;
 import com.supero.tasklist.util.jsf.FacesUtil;
@@ -48,8 +49,8 @@ public class PesquisaTasklistBean implements Serializable{
 	public void validaSessao() {
 		try {
 			ExternalContext currentExternalContext = FacesContext.getCurrentInstance().getExternalContext();
-			Tasklist tasklist = (Tasklist) currentExternalContext.getSessionMap().get("tasklist");
-			if(tasklist == null) {
+			Usuario usuario = (Usuario) currentExternalContext.getSessionMap().get("usuario");
+			if(usuario == null) {
 				FacesUtil.addInfoMessage("Efetue login!");
 				FacesContext.getCurrentInstance().getExternalContext().redirect("../Login.xhtml");
 			}
@@ -60,8 +61,6 @@ public class PesquisaTasklistBean implements Serializable{
 	public List<Tasklist> pesquisa() {				
 		tasklistsFiltrados.clear();
 		tasklistsFiltrados = tasklists.filtrados(filtro);
-		
-		//materiasFiltradas.add(materia);
 		return tasklistsFiltrados;
 	}
 	public List<Tasklist> pesquisaTasklists() {

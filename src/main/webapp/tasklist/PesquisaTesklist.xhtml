@@ -28,12 +28,13 @@
 	    	
 	    	<p:panelGrid columns="4" id="painel" style="width: 100%; margin-top: 20px"
 	    			columnClasses="rotulo, campo">
-	    		<p:outputLabel value="Nome" for="nome"/>
-	    		<p:inputText id="nome" size="20" value="#{pesquisaTasklistBean.filtro.nome}" style="up" />
-	    		<p:outputLabel value="Login" for="login"/>
-	    		<p:inputText id="login" size="14" value="#{pesquisaTasklistBean.filtro.login}"/>	
-	    		<p:outputLabel value="E-mail" for="email" />
-	    		<p:inputText id="email" size="20" value="#{pesquisaTasklistBean.filtro.email}"/>	    			    	
+	    		<p:outputLabel value="Titulo" for="titulo"/>
+	    		<p:inputText id="titulo" size="20" value="#{pesquisaTasklistBean.filtro.titulo}" style="up" />
+	    		<p:outputLabel value="Descrição" for="descricao"/>
+	    		<p:inputText id="descricao" size="14" value="#{pesquisaTasklistBean.filtro.descricao}"/>	
+	    		<p:outputLabel value="Concluída" for="concluida"/>
+				<p:selectBooleanCheckbox value="#{pesquisaTasklistBean.filtro.status}" itemLabel="Concluída"
+				id="concluida" />	    			    	
 	    	</p:panelGrid>
 	    	
 	    	<p:dataTable id="tasklistsTable" value="#{pesquisaTasklistBean.tasklistsFiltrados}" var="tasklist"
@@ -53,13 +54,12 @@
 	    		</p:column>	   
 	    		 		
 	    		<p:column style="width: 100px; text-align: center">
-	    			 <p:button icon="ui-icon-pencil" title="Editar"  outcome="/tasklists/CadastroTasklist">
+	    			 <p:button icon="ui-icon-pencil" title="Editar"  outcome="/tasklist/CadastroTasklist">
 	    				<f:param name="tasklist" value="#{tasklist.idtasklist}"/>
 	    			</p:button>			
 	    			<p:commandButton icon="ui-icon-trash" title="Excluir" oncomplete="PF('confirmacaoExclusao').show()" process="@this"
 						update=":frmPesquisa:confirmacaoExclusaoDialog">
-	    				<f:setPropertyActionListener target="#{pesquisaTasklistBean.tasklistselecionado}" 
-	    						value="#{tasklist}"/>	    				
+	    				<f:setPropertyActionListener target="#{pesquisaTasklistBean.tasklistselecionado}" value="#{tasklist}"/>	    				
 	    			</p:commandButton>
 	    		</p:column>
 	    	</p:dataTable>

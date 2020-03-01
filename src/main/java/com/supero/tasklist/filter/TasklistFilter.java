@@ -11,6 +11,13 @@ public class TasklistFilter implements Serializable {
 
 	private String descricao;
 	private String status;
+	private String titulo;
+	public String getTitulo() {
+		return titulo;
+	}
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
+	}
 	public String getDescricao() {
 		return descricao;
 	}

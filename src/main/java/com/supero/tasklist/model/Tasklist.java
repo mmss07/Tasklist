@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Tasklist {
@@ -14,15 +15,20 @@ public class Tasklist {
 	@GeneratedValue	
 	private Long idtasklist;	
 	
+	@Size(max = 80)
 	private String descricao;
 	
 	@NotNull
+	@Size(max = 60)
 	private String titulo;
 		
 	private String status;
+	
 	private Date datacadastro;
 	private Date dataalteracao;
 	private Date dataexclusao;
+	
+	
 	public Long getIdtasklist() {
 		return idtasklist;
 	}

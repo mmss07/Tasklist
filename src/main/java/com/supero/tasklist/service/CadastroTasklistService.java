@@ -48,6 +48,18 @@ public class CadastroTasklistService implements Serializable{
 		
 		return tasklist;
 	}
+	
+	public Tasklist porTitulo(String titulo) {
+		Tasklist tasklist = null;
+		
+		try {
+			tasklist = tasklists.porTitulo(titulo);
+		} catch (NoResultException e) {
+			// nenhum usuário encontrado com o e-mail informado
+		}
+		
+		return tasklist;
+	}
 
 	
 }
